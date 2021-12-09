@@ -27,8 +27,8 @@ public class EmployeeJpaController implements Serializable {
         this.emf = emf;
     }
     
-    public EmployeeJpaController() {
-        emf = Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
+    public EmployeeJpaController(){
+        emf= Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
     }
     
     private EntityManagerFactory emf = null;
@@ -61,7 +61,7 @@ public class EmployeeJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = employee.getEmployeeId();
+                int id = employee.getUserId();
                 if (findEmployee(id) == null) {
                     throw new NonexistentEntityException("The employee with id " + id + " no longer exists.");
                 }
@@ -82,7 +82,7 @@ public class EmployeeJpaController implements Serializable {
             Employee employee;
             try {
                 employee = em.getReference(Employee.class, id);
-                employee.getEmployeeId();
+                employee.getUserId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The employee with id " + id + " no longer exists.", enfe);
             }

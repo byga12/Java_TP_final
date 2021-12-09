@@ -11,7 +11,7 @@ public class Controller { //a.k.a la clase del admin
     
     //ALTA EMPLEADO
     public void createEmployee(String name, String surname, String address, Date birthDate, String nationality, String phone, String username, String password, String job, Double salary) {
-        Employee employee = new Employee(0, job, salary, 0, name, surname, address, birthDate, nationality, phone, username, password);
+        Employee employee = new Employee(job, salary, 0, name, surname, address, birthDate, nationality, phone, username, password);
         
         
         persistence.createEmployee(employee);

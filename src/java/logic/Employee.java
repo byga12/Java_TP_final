@@ -1,40 +1,30 @@
 package logic;
 
-import java.io.Serializable;
+
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 
 @Entity
-public class Employee extends User implements Serializable {
+@DiscriminatorValue(value="employee")
+public class Employee extends Person  {
     
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int employeeId;
+
     @Basic
     private String job;
     private Double salary;
 
-    public Employee(int userId, String name, String surname, String address, Date birthDate, String nationality, String phone, String username, String password) {
-        super(userId, name, surname, address, birthDate, nationality, phone, username, password);
+    public Employee() {
     }
 
-    public Employee(int employeeId, String job, Double salary, int userId, String name, String surname, String address, Date birthDate, String nationality, String phone, String username, String password) {
+    
+    
+    public Employee(String job, Double salary, int userId, String name, String surname, String address, Date birthDate, String nationality, String phone, String username, String password) {
         super(userId, name, surname, address, birthDate, nationality, phone, username, password);
-        this.employeeId = employeeId;
         this.job = job;
         this.salary = salary;
-    }
-
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
     }
 
     public String getJob() {
@@ -124,6 +114,9 @@ public class Employee extends User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    
+    
     
     
 }

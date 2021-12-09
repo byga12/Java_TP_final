@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package persistence;
 
 import java.io.Serializable;
@@ -12,7 +17,10 @@ import javax.persistence.criteria.Root;
 import logic.Customer;
 import persistence.exceptions.NonexistentEntityException;
 
-
+/**
+ *
+ * @author Micaela
+ */
 public class CustomerJpaController implements Serializable {
 
     public CustomerJpaController(EntityManagerFactory emf) {
@@ -20,7 +28,7 @@ public class CustomerJpaController implements Serializable {
     }
     
     public CustomerJpaController(){
-        emf = Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
+        emf= Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
     }
     
     private EntityManagerFactory emf = null;
@@ -53,7 +61,7 @@ public class CustomerJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                int id = customer.getCustomerId();
+                int id = customer.getUserId();
                 if (findCustomer(id) == null) {
                     throw new NonexistentEntityException("The customer with id " + id + " no longer exists.");
                 }
@@ -74,7 +82,7 @@ public class CustomerJpaController implements Serializable {
             Customer customer;
             try {
                 customer = em.getReference(Customer.class, id);
-                customer.getCustomerId();
+                customer.getUserId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The customer with id " + id + " no longer exists.", enfe);
             }
