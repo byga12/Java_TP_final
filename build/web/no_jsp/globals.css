@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: "Readex Pro";
+}
+
+.container {
+  position: relative;
+  display: flex;
+}
+
+/* todos los html deben linkear a este archivo css, ademas deben estar envueltos en un div con clase .container  */
+/* por otro lado, para renderizar la barra de navegacion, se debe añadir un tag script que apunta a navigation.js */

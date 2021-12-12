@@ -10,11 +10,22 @@ import javax.persistence.Entity;
 @DiscriminatorValue(value="customer")
 public class Customer extends Person  {
 
+    private int purchasesQuantity;
+    
     public Customer() {
     }
 
-    public Customer(int userId, String name, String surname, String address, Date birthDate, String nationality, String phone, String username, String password) {
-        super(userId, name, surname, address, birthDate, nationality, phone, username, password);
+    public Customer(int purchasesQuantity, int userId, String name, String surname, String address, String dni, String nationality, String phone, String email, Date birthDate) {
+        super(userId, name, surname, address, dni, nationality, phone, email, birthDate);
+        this.purchasesQuantity = purchasesQuantity;
+    }
+
+    public int getPurchasesQuantity() {
+        return purchasesQuantity;
+    }
+
+    public void setPurchasesQuantity(int purchasesQuantity) {
+        this.purchasesQuantity = purchasesQuantity;
     }
 
     public int getUserId() {
@@ -49,12 +60,12 @@ public class Customer extends Person  {
         this.address = address;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public String getDni() {
+        return dni;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getNationality() {
@@ -73,26 +84,20 @@ public class Customer extends Person  {
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
-    
-    
-    
-
-    
-    
     
 }

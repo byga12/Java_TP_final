@@ -15,16 +15,18 @@ public class Employee extends Person  {
     @Basic
     private String job;
     private Double salary;
+    private String username;
+    private String password;
 
     public Employee() {
     }
 
-    
-    
-    public Employee(String job, Double salary, int userId, String name, String surname, String address, Date birthDate, String nationality, String phone, String username, String password) {
-        super(userId, name, surname, address, birthDate, nationality, phone, username, password);
+    public Employee(String job, Double salary, String username, String password, int userId, String name, String surname, String address, String dni, String nationality, String phone, String email, Date birthDate) {
+        super(userId, name, surname, address, dni, nationality, phone, email, birthDate);
         this.job = job;
         this.salary = salary;
+        this.username = username;
+        this.password = password;
     }
 
     public String getJob() {
@@ -41,6 +43,22 @@ public class Employee extends Person  {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getUserId() {
@@ -75,12 +93,12 @@ public class Employee extends Person  {
         this.address = address;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public String getDni() {
+        return dni;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getNationality() {
@@ -99,21 +117,23 @@ public class Employee extends Person  {
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
+    
+    
 
     
     

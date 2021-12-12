@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistence;
 
 import java.io.Serializable;
@@ -17,10 +12,6 @@ import javax.persistence.criteria.Root;
 import logic.Employee;
 import persistence.exceptions.NonexistentEntityException;
 
-/**
- *
- * @author Micaela
- */
 public class EmployeeJpaController implements Serializable {
 
     public EmployeeJpaController(EntityManagerFactory emf) {
@@ -28,9 +19,8 @@ public class EmployeeJpaController implements Serializable {
     }
     
     public EmployeeJpaController(){
-        emf= Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
+        emf = Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
     }
-    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {

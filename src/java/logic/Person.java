@@ -27,27 +27,27 @@ public abstract class Person implements Serializable {
     String name;
     String surname;
     String address;
+    String dni;
     String nationality;
     String phone;
-    String username;
-    String password;
-    
+    String email;
+
     @Temporal(TemporalType.DATE)
     Date birthDate;
 
     public Person() {
     }
 
-    public Person(int userId, String name, String surname, String address, Date birthDate, String nationality, String phone, String username, String password) {
+    public Person(int userId, String name, String surname, String address, String dni, String nationality, String phone, String email, Date birthDate) {
         this.userId = userId;
         this.name = name;
         this.surname = surname;
         this.address = address;
-        this.birthDate = birthDate;
+        this.dni = dni;
         this.nationality = nationality;
         this.phone = phone;
-        this.username = username;
-        this.password = password;
+        this.email = email;
+        this.birthDate = birthDate;
     }
 
     public int getUserId() {
@@ -82,12 +82,12 @@ public abstract class Person implements Serializable {
         this.address = address;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public String getDni() {
+        return dni;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getNationality() {
@@ -106,21 +106,21 @@ public abstract class Person implements Serializable {
         this.phone = phone;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
-
+    
     
 }

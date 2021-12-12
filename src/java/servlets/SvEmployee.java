@@ -40,20 +40,21 @@ public class SvEmployee extends HttpServlet {
             String name = request.getParameter("name");
             String surname = request.getParameter("surname");
             String address = request.getParameter("address");
-            
+            String dni = request.getParameter("dni");
             //Para manejar la fecha, utilizo el parser
             SimpleDateFormat formatter=new SimpleDateFormat("yyyy-dd-mm");
             Date birthDate = formatter.parse(request.getParameter("birthDate"));
             String nationality = request.getParameter("nationality");
             String phone = request.getParameter("phone");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            String email = request.getParameter("email");
             String job = request.getParameter("job");
             Double salary = Double.parseDouble(request.getParameter("salary"));
             
-            control.createEmployee(name, surname, address, birthDate,nationality, phone, username, password, job, salary);
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            control.createEmployee(name, surname, address, dni, birthDate, nationality, phone, email, job, salary, username, password);
             //redirecciono a otra página
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("pages/homePage/home.jsp");
         } catch (ParseException ex) {
             Logger.getLogger(SvEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }

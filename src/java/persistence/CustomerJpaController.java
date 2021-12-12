@@ -28,7 +28,7 @@ public class CustomerJpaController implements Serializable {
     }
     
     public CustomerJpaController(){
-        emf= Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
+        emf = Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
     }
     
     private EntityManagerFactory emf = null;
