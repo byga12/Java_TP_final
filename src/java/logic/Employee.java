@@ -1,16 +1,12 @@
 package logic;
 
-
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-
 @Entity
-@DiscriminatorValue(value="employee")
-public class Employee extends Person  {
-    
+public class Employee extends Person {
 
     @Basic
     private String job;
@@ -132,11 +128,5 @@ public class Employee extends Person  {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-    
-    
 
-    
-    
-    
-    
 }
