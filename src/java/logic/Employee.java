@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 @Entity
 public class Employee extends Person {
 
-    @Basic
     private String job;
     private Double salary;
     private String username;
