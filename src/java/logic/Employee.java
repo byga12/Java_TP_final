@@ -1,8 +1,6 @@
 package logic;
 
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
