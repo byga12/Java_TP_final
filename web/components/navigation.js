@@ -102,19 +102,19 @@ class navigation extends HTMLElement {
             </a>
           </li>
           <li>
-            <a href="" class="section_item">
+            <a href="../../SvService" class="section_item">
               <i class="fas fa-clipboard-list section_item_icon"></i>
               <p class="section_item_text">Servicios</p>
             </a>
           </li>
           <li>
-            <a href="" class="section_item">
+            <a href="../../SvSale" class="section_item">
               <i class="fas fa-money-bill-wave section_item_icon"></i>
               <p class="section_item_text">Ventas</p>
             </a>
           </li>
           <li>
-            <a href="" class="section_item">
+            <a href="../../SvProfit" class="section_item">
               <i class="fas fa-chart-line section_item_icon"></i>
               <p class="section_item_text">Ganancias</p>
             </a>
@@ -134,7 +134,7 @@ class navigation extends HTMLElement {
             </li>
  
           <li>
-            <a href="" class="section_item">
+            <a href="../../SvCustomer" class="section_item">
               <i class="fas fa-users section_item_icon"></i>
               <p class="section_item_text">Clientes</p>
             </a>
