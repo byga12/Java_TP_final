@@ -125,12 +125,14 @@ class navigation extends HTMLElement {
         <h2 class="section_title">Usuarios</h2>
 
         <ul class="section_list">
-          <li>
-            <a href="../employeePage/employee.jsp" class="section_item">
-              <i class="fas fa-users-cog section_item_icon"></i>
-              <p class="section_item_text">Empleados</p>
-            </a>
-          </li>
+
+            <li>
+              <a href="../../SvEmployee" class="section_item">
+                <i class="fas fa-users-cog section_item_icon"></i>
+                <p class="section_item_text">Empleados</p>
+              </a>
+            </li>
+ 
           <li>
             <a href="" class="section_item">
               <i class="fas fa-users section_item_icon"></i>
