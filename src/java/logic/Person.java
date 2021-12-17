@@ -1,4 +1,3 @@
-
 package logic;
 
 import java.io.Serializable;
@@ -16,14 +15,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@DiscriminatorColumn(name="type")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Person implements Serializable {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int userId;
-    @Basic
+
     String name;
     String surname;
     String address;
@@ -121,6 +119,5 @@ public abstract class Person implements Serializable {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-    
-    
+
 }
