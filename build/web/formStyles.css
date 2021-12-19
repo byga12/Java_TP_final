@@ -1,0 +1,35 @@
+.content {
+  margin: 3rem;
+  width: 100%;
+}
+
+.header {
+  margin-block: 2rem;
+}
+
+.form {
+  padding: 3rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  gap: 2rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.form input {
+  padding-block: 0.5rem;
+  padding-inline: 0.7rem;
+}
+
+.submit_button {
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  width: 50%;
+  color: #eee;
+  background-color: #1678f2;
+  justify-self: center;
+  border-radius: 10px;
+}
