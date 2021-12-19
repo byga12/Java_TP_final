@@ -55,37 +55,53 @@ public class Controller { //a.k.a la clase del admin
     public List<Customer> getCustomers() {
         return persistence.getCustomers();
     }
+
     //OBTENER CLIENTE POR ID
     //ALTA CLIENTE
     //ELIMINAR CLIENTE
+    public void deleteCustomer(int id) throws NonexistentEntityException {
+        persistence.deleteCustomer(id);
+    }
     //MODIFICAR CLIENTE
 
     //OBTENER VENTAS
     public List<Sale> getSales() {
         return persistence.getSales();
     }
+
     //OBTENER VENTA POR ID
     //ALTA VENTA
     //ELIMINAR VENTA
-    //MODIFICAR VENTA
-
-    //OBTENER PAQUETES TURÍSTICOS
-    public List<TouristPackage> getTouristPackages() {
-        return persistence.getTouristPackages();
+    public void deleteSale(int id) throws NonexistentEntityException {
+        persistence.deleteSale(id);
     }
-    //OBTENER PAQUETE TURÍßTICO POR ID
-    //ALTA PAQUETE TURÍSTICO
-    //ELIMINAR PAQUETE TURÍSTICO
-    //MODIFICAR PAQUETE TURÍSTICO
+    //MODIFICAR VENTA
 
     //OBTENER SERVICIOS TURÍSTICOS
     public List<TouristService> getTouristServices() {
         return persistence.getTouristServices();
     }
+
     //OBTENER SERVICIO TURÍßTICO POR ID
     //ALTA SERVICIO TURÍSTICO
     //ELIMINAR SERVICIO TURÍSTICO
+    public void deleteTouristService(int id) throws NonexistentEntityException {
+        persistence.deleteTouristService(id);
+    }
     //MODIFICAR SERVICIO TURÍSTICO
+
+    //OBTENER PAQUETES TURÍSTICOS
+    public List<TouristPackage> getTouristPackages() {
+        return persistence.getTouristPackages();
+    }
+
+    //OBTENER PAQUETE TURÍßTICO POR ID
+    //ALTA PAQUETE TURÍSTICO
+    //ELIMINAR PAQUETE TURÍSTICO
+    public void deleteTouristPackage(int id) throws NonexistentEntityException {
+        persistence.deleteTouristPackage(id);
+    }
+    //MODIFICAR PAQUETE TURÍSTICO
 
     //Existe un paquete con la lista de servicios dados? devolvemelo, sino devolve null
 //    public TouristPackage existingPackage(List<TouristService> services) {

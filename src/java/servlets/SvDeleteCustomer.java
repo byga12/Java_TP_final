@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import logic.Controller;
 import persistence.exceptions.NonexistentEntityException;
 
-@WebServlet(name = "SvDeleteEmployee", urlPatterns = {"/SvDeleteEmployee"})
-public class SvDeleteEmployee extends HttpServlet {
+@WebServlet(name = "SvDeleteCustomer", urlPatterns = {"/SvDeleteCustomer"})
+public class SvDeleteCustomer extends HttpServlet {
 
     //Instancio la clase Controller de la lógica
     Controller control = new Controller();
@@ -24,17 +24,18 @@ public class SvDeleteEmployee extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            control.deleteEmployee(Integer.parseInt(request.getParameter("userId")));
+            control.deleteCustomer(Integer.parseInt(request.getParameter("userId")));
         } catch (NonexistentEntityException ex) {
-            Logger.getLogger(SvDeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SvDeleteCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("pages/employeePage/employee.jsp");
+        response.sendRedirect("pages/customerPage/customer.jsp");
     }
 
     @Override
