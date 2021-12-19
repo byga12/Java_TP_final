@@ -40,15 +40,15 @@ public class TouristService implements Serializable {
     public TouristService() {
     }
 
-    public TouristService(int serviceId, String serviceName, String serviceDescription, String serviceDestiny, Date serviceDate, double servicePrice, List<Sale> salesWithService, List<TouristPackage> packagesWithService) {
+    public TouristService(int serviceId, String serviceName, String serviceDescription, String serviceDestiny, Date serviceDate, double servicePrice) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
         this.serviceDestiny = serviceDestiny;
         this.serviceDate = serviceDate;
         this.servicePrice = servicePrice;
-        this.salesWithService = salesWithService;
-        this.packagesWithService = packagesWithService;
+        this.salesWithService = new ArrayList<>();
+        this.packagesWithService = new ArrayList<>();
     }
 
     public int getServiceId() {

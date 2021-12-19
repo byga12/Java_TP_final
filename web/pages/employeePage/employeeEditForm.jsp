@@ -28,7 +28,7 @@
     } 
     Employee toUpdateEmployee = (Employee) mySession.getAttribute("toUpdateEmployee"); 
     //Obtengo la fecha de nacimiento del empleado y la formateo 
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); 
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
     String strDate = dateFormat.format(toUpdateEmployee.getBirthDate()); %>
     <div class="container">
       <navigation-component></navigation-component>

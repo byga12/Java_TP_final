@@ -35,6 +35,8 @@ public class SvDeleteCustomer extends HttpServlet {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(SvDeleteCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Refresco y redirijo
+        request.getSession().setAttribute("customersList", control.getCustomers());
         response.sendRedirect("pages/customerPage/customer.jsp");
     }
 

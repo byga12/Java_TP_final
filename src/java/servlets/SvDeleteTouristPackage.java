@@ -36,6 +36,8 @@ public class SvDeleteTouristPackage extends HttpServlet {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(SvDeleteTouristPackage.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Refresco y redirijo
+        request.getSession().setAttribute("touristPackagesList", control.getTouristPackages());
         response.sendRedirect("pages/touristPackagePage/touristPackage.jsp");
     }
 

@@ -19,9 +19,12 @@
     ></script>
   </head>
   <body>
-    <% HttpSession mySession = request.getSession(); String username = (String)
-    mySession.getAttribute("username"); if (username == null) {
-    response.sendRedirect("index.jsp"); } %>
+    <% HttpSession mySession = request.getSession();
+    String username = (String)
+    mySession.getAttribute("username"); 
+    if (username == null) {
+      response.sendRedirect("index.jsp"); 
+    } %>
     <div class="container">
       <navigation-component></navigation-component>
 
@@ -67,7 +70,7 @@
           <label for="password">Contraseña</label
           ><input type="password" id="password" name="password" required />
 
-          <button type="submit" class="submit_button">Enviar datos</button>
+          <button type="submit" class="submit_button">Alta empleado</button>
         </form>
       </div>
     </div>

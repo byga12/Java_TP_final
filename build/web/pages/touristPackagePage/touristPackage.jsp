@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="logic.TouristService"%>
 <%@page import="logic.TouristPackage"%>
 <%@page import="logic.Controller"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -45,6 +46,7 @@
                             <th>Acciones</th>
                             <th>ID de paquete</th>
                             <th>Precio total</th>
+                            <th>Servicios incluidos</th>
                         </tr>
                         <%
                             List<TouristPackage> touristPackagesList = (List) mySession.getAttribute("touristPackagesList");
@@ -54,18 +56,25 @@
                             <td class="action_cell">
 
                                 <form action="../../SvDeleteTouristPackage" method="POST">
-                                    <input type="hidden" name="userId" value="<%=touristPackage.getPackageId()%>">
+                                    <input type="hidden" name="packageId" value="<%=touristPackage.getPackageId()%>">
                                     <button type="submit" class="action_button"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                                 /
                                 <form action="../../SvEditTouristPackage" method="POST">
-                                    <input type="hidden" name="userId" value="<%=touristPackage.getPackageId()%>">
+                                    <input type="hidden" name="packageId" value="<%=touristPackage.getPackageId()%>">
                                     <button type="submit" class="action_button"><i class="fas fa-edit"></i></button>
                                 </form>
 
                             </td>          
                             <td><%=touristPackage.getPackageId()%></td>
                             <td><%=touristPackage.getPackagePrice()%></td>
+                            <td>
+                              <ul>
+                                <%for(TouristService service : touristPackage.getServicesList()){%>
+                                  <li><%=service.getServiceName()%></li>
+                                <%}%>
+                              </ul>
+                            </td>
                         </tr>
                         <%}%>
 

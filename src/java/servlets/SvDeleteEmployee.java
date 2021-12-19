@@ -34,6 +34,8 @@ public class SvDeleteEmployee extends HttpServlet {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(SvDeleteEmployee.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Refresco y redirijo
+        request.getSession().setAttribute("employeesList", control.getEmployees());
         response.sendRedirect("pages/employeePage/employee.jsp");
     }
 

@@ -58,6 +58,11 @@ public class Controller { //a.k.a la clase del admin
 
     //OBTENER CLIENTE POR ID
     //ALTA CLIENTE
+    public void createCustomer(String name, String surname, String address, String dni, Date birthDate, String nationality, String phone, String email) {
+        Customer customer = new Customer(0, name, surname, address, dni, nationality, phone, email, birthDate);
+        persistence.createCustomer(customer);
+    }
+
     //ELIMINAR CLIENTE
     public void deleteCustomer(int id) throws NonexistentEntityException {
         persistence.deleteCustomer(id);
@@ -83,7 +88,16 @@ public class Controller { //a.k.a la clase del admin
     }
 
     //OBTENER SERVICIO TURÍßTICO POR ID
+    public TouristService getTouristServiceById(int id) {
+        return persistence.getTouristServiceById(id);
+    }
+
     //ALTA SERVICIO TURÍSTICO
+    public void createTouristService(String name, String description, String destiny, Date serviceDate, double price) {
+        TouristService touristService = new TouristService(0, name, description, destiny, serviceDate, price);
+        persistence.createTouristService(touristService);
+    }
+
     //ELIMINAR SERVICIO TURÍSTICO
     public void deleteTouristService(int id) throws NonexistentEntityException {
         persistence.deleteTouristService(id);
@@ -97,6 +111,11 @@ public class Controller { //a.k.a la clase del admin
 
     //OBTENER PAQUETE TURÍßTICO POR ID
     //ALTA PAQUETE TURÍSTICO
+    public void createTouristPackage(List<TouristService> servicesList) {
+        TouristPackage touristPackage = new TouristPackage(0, servicesList);
+        persistence.createTouristPackage(touristPackage);
+    }
+
     //ELIMINAR PAQUETE TURÍSTICO
     public void deleteTouristPackage(int id) throws NonexistentEntityException {
         persistence.deleteTouristPackage(id);

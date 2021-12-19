@@ -30,10 +30,10 @@
 
       <div class="content">
         <header class="header">
-          <h2 class="content_title">Formulario de alta de empleado</h2>
+          <h2 class="content_title">Formulario de alta de cliente</h2>
         </header>
 
-        <form action="../../SvEmployee" method="POST" class="form">
+        <form action="../../SvCustomer" method="POST" class="form">
           <label for="name">Nombre</label
           ><input type="text" id="name" name="name" required />
 
@@ -58,19 +58,7 @@
           <label for="email">Email</label
           ><input type="text" id="email" name="email" required />
 
-          <label for="job">Puesto</label
-          ><input type="text" id="job" name="job" required />
-
-          <label for="salary">Salario</label
-          ><input type="text" id="salary" name="salary" required />
-
-          <label for="username">Nombre de usuario</label
-          ><input type="text" id="username" name="username" required />
-
-          <label for="password">Contraseña</label
-          ><input type="password" id="password" name="password" required />
-
-          <button type="submit" class="submit_button">Alta empleado</button>
+          <button type="submit" class="submit_button">Alta cliente</button>
         </form>
       </div>
     </div>

@@ -35,6 +35,8 @@ public class SvDeleteTouristService extends HttpServlet {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(SvDeleteTouristService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Refresco y redirijo
+        request.getSession().setAttribute("touristServicesList", control.getTouristServices());
         response.sendRedirect("pages/touristServicePage/touristService.jsp");
     }
 

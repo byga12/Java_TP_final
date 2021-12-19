@@ -1,7 +1,12 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +39,22 @@ public class SvTouristService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            String destiny = request.getParameter("destiny");
+            //Para manejar la fecha, utilizo el parser
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            Date serviceDate = formatter.parse(request.getParameter("serviceDate"));
+            Double price = Double.parseDouble(request.getParameter("price"));
 
+            control.createTouristService(name, description, destiny, serviceDate, price);
+            //Refresco y redirijo
+            request.getSession().setAttribute("touristServicesList", control.getTouristServices());
+            response.sendRedirect("pages/touristServicePage/touristService.jsp");
+        } catch (ParseException ex) {
+            Logger.getLogger(SvCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

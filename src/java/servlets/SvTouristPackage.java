@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.Controller;
 import logic.TouristPackage;
+import logic.TouristService;
 
 @WebServlet(name = "SvTouristPackage", urlPatterns = {"/SvTouristPackage"})
 public class SvTouristPackage extends HttpServlet {
@@ -19,7 +22,6 @@ public class SvTouristPackage extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override
@@ -34,6 +36,25 @@ public class SvTouristPackage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //Al llegar la solicitud doPost, obtengo el id de las casillas chequedas
+        System.out.println(Arrays.toString(request.getParameterValues("touristServiceId")));
+        String arrayIds[] = request.getParameterValues("touristServiceId");
+        //Una vez que tengo el id, primero me fijo que el paquete tenga más de un servicio, caso contrario tiro un error
+        if (arrayIds.length == 1) {
+            return;
+        }
+        //Creo una nueva lista de servicios
+        List<TouristService> servicesList = new ArrayList<>();
+        //Recorro ese array de IDs, convirtiendo cada uno a número, obtengo el servicio y lo añado a mi lista de servicios.
+        for (String arrayId : arrayIds) {
+            int id = Integer.parseInt(arrayId);
+            servicesList.add(control.getTouristServiceById(id));
+        }
+        //Ahora si, llamo al constructor de TouristPackage desde la controladora de la lógica y le paso mi lista de servicios
+        control.createTouristPackage(servicesList);
+        //Refresco y redirijo
+        request.getSession().setAttribute("touristPackagesList", control.getTouristPackages());
+        response.sendRedirect("pages/touristPackagePage/touristPackage.jsp");
     }
 
     @Override

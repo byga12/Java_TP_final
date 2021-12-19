@@ -36,6 +36,8 @@ public class SvDeleteSale extends HttpServlet {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(SvDeleteSale.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Refresco y redirijo
+        request.getSession().setAttribute("salesList", control.getSales());
         response.sendRedirect("pages/salePage/sale.jsp");
     }
 

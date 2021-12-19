@@ -55,12 +55,12 @@
                             <td class="action_cell">
 
                                 <form action="../../SvDeleteSale" method="POST">
-                                    <input type="hidden" name="userId" value="<%=sale.getSaleId()%>">
+                                    <input type="hidden" name="saleId" value="<%=sale.getSaleId()%>">
                                     <button type="submit" class="action_button"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                                 /
                                 <form action="../../SvEditSale" method="POST">
-                                    <input type="hidden" name="userId" value="<%=sale.getSaleId()%>">
+                                    <input type="hidden" name="saleId" value="<%=sale.getSaleId()%>">
                                     <button type="submit" class="action_button"><i class="fas fa-edit"></i></button>
                                 </form>
 

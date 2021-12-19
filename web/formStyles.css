@@ -19,9 +19,18 @@
   align-items: center;
 }
 
+.form_title {
+  justify-self: center;
+}
+
 .form input {
   padding-block: 0.5rem;
   padding-inline: 0.7rem;
+}
+
+.form_checkbox_label {
+  font-size: 1.3rem;
+  margin: 1rem;
 }
 
 .submit_button {
