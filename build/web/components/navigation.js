@@ -102,9 +102,15 @@ class navigation extends HTMLElement {
             </a>
           </li>
           <li>
-            <a href="../../SvService" class="section_item">
+            <a href="../../SvTouristService" class="section_item">
               <i class="fas fa-clipboard-list section_item_icon"></i>
               <p class="section_item_text">Servicios</p>
+            </a>
+          </li>
+          <li>
+            <a href="../../SvTouristPackage" class="section_item">
+              <i class="fas fa-cubes section_item_icon"></i>
+              <p class="section_item_text">Paquetes</p>
             </a>
           </li>
           <li>
@@ -119,6 +125,7 @@ class navigation extends HTMLElement {
               <p class="section_item_text">Ganancias</p>
             </a>
           </li>
+          
         </ul>
       </section>
       <section class="section">

@@ -1,19 +1,26 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Customer extends Person {
 
     private int purchasesQuantity;
 
+    @OneToMany(mappedBy = "customer")
+    private List<Sale> salesAssociated;
+
     public Customer() {
     }
 
-    public Customer(int purchasesQuantity, int userId, String name, String surname, String address, String dni, String nationality, String phone, String email, Date birthDate) {
+    public Customer(int userId, String name, String surname, String address, String dni, String nationality, String phone, String email, Date birthDate) {
         super(userId, name, surname, address, dni, nationality, phone, email, birthDate);
-        this.purchasesQuantity = purchasesQuantity;
+        this.purchasesQuantity = 0;
+        this.salesAssociated = new ArrayList<>();
     }
 
     public int getPurchasesQuantity() {
@@ -22,6 +29,15 @@ public class Customer extends Person {
 
     public void setPurchasesQuantity(int purchasesQuantity) {
         this.purchasesQuantity = purchasesQuantity;
+    }
+
+    public List<Sale> getSalesAssociated() {
+        return salesAssociated;
+    }
+
+    public void setSalesAssociated(List<Sale> salesAssociated) {
+        this.salesAssociated = salesAssociated;
+        this.purchasesQuantity = this.salesAssociated.size();
     }
 
     public int getUserId() {
@@ -96,4 +112,14 @@ public class Customer extends Person {
         this.birthDate = birthDate;
     }
 
+    ////////////////////////////////////////////
+    public void addSale(Sale sale) {
+        this.salesAssociated.add(sale);
+        this.purchasesQuantity = this.salesAssociated.size();
+    }
+
+    public void removeSale(Sale sale) {
+        this.salesAssociated.remove(sale);
+        this.purchasesQuantity = this.salesAssociated.size();
+    }
 }

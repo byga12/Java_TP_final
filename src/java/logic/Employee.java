@@ -1,7 +1,10 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Employee extends Person {
@@ -10,6 +13,9 @@ public class Employee extends Person {
     private Double salary;
     private String username;
     private String password;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Sale> salesDone;
 
     public Employee() {
     }
@@ -20,6 +26,7 @@ public class Employee extends Person {
         this.salary = salary;
         this.username = username;
         this.password = password;
+        this.salesDone = new ArrayList<>();
     }
 
     public String getJob() {
@@ -52,6 +59,14 @@ public class Employee extends Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Sale> getSalesDone() {
+        return salesDone;
+    }
+
+    public void setSalesDone(List<Sale> salesDone) {
+        this.salesDone = salesDone;
     }
 
     public int getUserId() {
@@ -126,4 +141,12 @@ public class Employee extends Person {
         this.birthDate = birthDate;
     }
 
+    ////////////////////////////////////////////
+    public void removeSale(Sale sale) {
+        this.salesDone.remove(sale);
+    }
+
+    public void addSale(Sale sale) {
+        this.salesDone.add(sale);
+    }
 }

@@ -11,7 +11,6 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="../../globals.css" />
-    <link href="styles.css" rel="stylesheet" type="text/css" />
     <script
       src="../../components/navigation.js"
       type="text/javascript"

@@ -1,26 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package persistence;
 
 import java.io.Serializable;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import logic.Sale;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import logic.Employee;
 import persistence.exceptions.NonexistentEntityException;
 
+/**
+ *
+ * @author Micaela
+ */
 public class EmployeeJpaController implements Serializable {
 
     public EmployeeJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-    public EmployeeJpaController(){
+
+    public EmployeeJpaController() {
         emf = Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
     }
+
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -28,11 +40,29 @@ public class EmployeeJpaController implements Serializable {
     }
 
     public void create(Employee employee) {
+        if (employee.getSalesDone() == null) {
+            employee.setSalesDone(new ArrayList<Sale>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            List<Sale> attachedSalesDone = new ArrayList<Sale>();
+            for (Sale salesDoneSaleToAttach : employee.getSalesDone()) {
+                salesDoneSaleToAttach = em.getReference(salesDoneSaleToAttach.getClass(), salesDoneSaleToAttach.getSaleId());
+                attachedSalesDone.add(salesDoneSaleToAttach);
+            }
+            employee.setSalesDone(attachedSalesDone);
             em.persist(employee);
+            for (Sale salesDoneSale : employee.getSalesDone()) {
+                Employee oldEmployeeOfSalesDoneSale = salesDoneSale.getEmployee();
+                salesDoneSale.setEmployee(employee);
+                salesDoneSale = em.merge(salesDoneSale);
+                if (oldEmployeeOfSalesDoneSale != null) {
+                    oldEmployeeOfSalesDoneSale.getSalesDone().remove(salesDoneSale);
+                    oldEmployeeOfSalesDoneSale = em.merge(oldEmployeeOfSalesDoneSale);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -46,7 +76,34 @@ public class EmployeeJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Employee persistentEmployee = em.find(Employee.class, employee.getUserId());
+            List<Sale> salesDoneOld = persistentEmployee.getSalesDone();
+            List<Sale> salesDoneNew = employee.getSalesDone();
+            List<Sale> attachedSalesDoneNew = new ArrayList<Sale>();
+            for (Sale salesDoneNewSaleToAttach : salesDoneNew) {
+                salesDoneNewSaleToAttach = em.getReference(salesDoneNewSaleToAttach.getClass(), salesDoneNewSaleToAttach.getSaleId());
+                attachedSalesDoneNew.add(salesDoneNewSaleToAttach);
+            }
+            salesDoneNew = attachedSalesDoneNew;
+            employee.setSalesDone(salesDoneNew);
             employee = em.merge(employee);
+            for (Sale salesDoneOldSale : salesDoneOld) {
+                if (!salesDoneNew.contains(salesDoneOldSale)) {
+                    salesDoneOldSale.setEmployee(null);
+                    salesDoneOldSale = em.merge(salesDoneOldSale);
+                }
+            }
+            for (Sale salesDoneNewSale : salesDoneNew) {
+                if (!salesDoneOld.contains(salesDoneNewSale)) {
+                    Employee oldEmployeeOfSalesDoneNewSale = salesDoneNewSale.getEmployee();
+                    salesDoneNewSale.setEmployee(employee);
+                    salesDoneNewSale = em.merge(salesDoneNewSale);
+                    if (oldEmployeeOfSalesDoneNewSale != null && !oldEmployeeOfSalesDoneNewSale.equals(employee)) {
+                        oldEmployeeOfSalesDoneNewSale.getSalesDone().remove(salesDoneNewSale);
+                        oldEmployeeOfSalesDoneNewSale = em.merge(oldEmployeeOfSalesDoneNewSale);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -75,6 +132,11 @@ public class EmployeeJpaController implements Serializable {
                 employee.getUserId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The employee with id " + id + " no longer exists.", enfe);
+            }
+            List<Sale> salesDone = employee.getSalesDone();
+            for (Sale salesDoneSale : salesDone) {
+                salesDoneSale.setEmployee(null);
+                salesDoneSale = em.merge(salesDoneSale);
             }
             em.remove(employee);
             em.getTransaction().commit();
@@ -130,5 +192,5 @@ public class EmployeeJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }
