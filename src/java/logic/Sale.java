@@ -21,6 +21,7 @@ public class Sale implements Serializable {
     private Date saleDate;
 
     private String paymentMethod;
+    private double price;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -49,10 +50,8 @@ public class Sale implements Serializable {
         this.employee = employee;
         this.customer = customer;
         this.tourist_service = tourist_service;
+        this.price = tourist_service.getServicePrice();
 
-        //relacion bidireccional
-        tourist_service.addSaleWithService(this);
-        this.tourist_service = tourist_service;
     }
 
     //Constructor con paquete turístico
@@ -63,10 +62,7 @@ public class Sale implements Serializable {
         this.employee = employee;
         this.customer = customer;
         this.tourist_package = tourist_package;
-
-        //relacion bidireccional
-        tourist_package.addSaleWithPackage(this);
-        this.tourist_package = tourist_package;
+        this.price = tourist_package.getPackagePrice();
 
     }
 
@@ -134,5 +130,14 @@ public class Sale implements Serializable {
         customer.addSale(this);
         this.customer = customer;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     ////////////////////////////////////////////
 }

@@ -37,9 +37,8 @@ public class SvTouristPackage extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //Al llegar la solicitud doPost, obtengo el id de las casillas chequedas
-        System.out.println(Arrays.toString(request.getParameterValues("touristServiceId")));
         String arrayIds[] = request.getParameterValues("touristServiceId");
-        //Una vez que tengo el id, primero me fijo que el paquete tenga más de un servicio, caso contrario tiro un error
+        //Una vez que tengo el id, primero me fijo que el paquete tenga más de un servicio, caso contrario retorno
         if (arrayIds.length == 1) {
             return;
         }
@@ -50,8 +49,9 @@ public class SvTouristPackage extends HttpServlet {
             int id = Integer.parseInt(arrayId);
             servicesList.add(control.getTouristServiceById(id));
         }
-        //Ahora si, llamo al constructor de TouristPackage desde la controladora de la lógica y le paso mi lista de servicios
-        control.createTouristPackage(servicesList);
+        //Con el siguiente método me fijo si ya hay un paquete de servicios con los mismos paquetes que se seleccionaron y de ya haber uno, no creo ningún paquete.
+        //Caso contrario, creo un paquete nuevo.
+        control.getOrCreatePackage(servicesList);
         //Refresco y redirijo
         request.getSession().setAttribute("touristPackagesList", control.getTouristPackages());
         response.sendRedirect("pages/touristPackagePage/touristPackage.jsp");

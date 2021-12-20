@@ -1,5 +1,8 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import persistence.PersistenceController;
@@ -57,6 +60,10 @@ public class Controller { //a.k.a la clase del admin
     }
 
     //OBTENER CLIENTE POR ID
+    public Customer getCustomerById(int id) {
+        return persistence.getCustomerById(id);
+    }
+
     //ALTA CLIENTE
     public void createCustomer(String name, String surname, String address, String dni, Date birthDate, String nationality, String phone, String email) {
         Customer customer = new Customer(0, name, surname, address, dni, nationality, phone, email, birthDate);
@@ -75,7 +82,18 @@ public class Controller { //a.k.a la clase del admin
     }
 
     //OBTENER VENTA POR ID
-    //ALTA VENTA
+    //ALTA VENTA CON SERVICIO ÚNICO
+    public void createSaleWithService(Date saleDate, String paymentMethod, Employee employee, Customer customer, TouristService service) {
+        Sale saleWithService = new Sale(0, saleDate, paymentMethod, employee, customer, service);
+        persistence.createSale(saleWithService);
+    }
+
+    //ALTA VENTA CON PAQUETE
+    public void createSaleWithPackage(Date saleDate, String paymentMethod, Employee employee, Customer customer, TouristPackage touristPackage) {
+        Sale saleWithPackage = new Sale(0, saleDate, paymentMethod, employee, customer, touristPackage);
+        persistence.createSale(saleWithPackage);
+    }
+
     //ELIMINAR VENTA
     public void deleteSale(int id) throws NonexistentEntityException {
         persistence.deleteSale(id);
@@ -122,14 +140,31 @@ public class Controller { //a.k.a la clase del admin
     }
     //MODIFICAR PAQUETE TURÍSTICO
 
-    //Existe un paquete con la lista de servicios dados? devolvemelo, sino devolve null
-//    public TouristPackage existingPackage(List<TouristService> services) {
-//        TouristPackage packages = persistence.getTouristPackages();
-//        for (TouristPackage touristPackage : packages) {
-//            if (touristPackage.getServicesList().containsAll(services)) {
-//                return touristPackage;
-//            }
-//        }
-//        return null;
-//    }
+    //Existe un paquete con la lista de servicios dados? devolvemelo, sino crea uno y retornalo
+    public TouristPackage getOrCreatePackage(List<TouristService> services) {
+        List<TouristPackage> packages = persistence.getTouristPackages();
+
+        ////Obtengo array de ids de la lista servicio
+        int arrayA[] = new int[services.size()];
+        for (int i = 0; i < services.size(); i++) {
+            arrayA[i] = services.get(i).getServiceId();
+        }
+        /////
+
+        for (TouristPackage tp : packages) {
+            int arrayB[] = new int[tp.getServicesList().size()];
+            for (int i = 0; i < tp.getServicesList().size(); i++) {
+
+                arrayB[i] = tp.getServicesList().get(i).getServiceId();
+            }
+
+            if (Arrays.equals(arrayA, arrayB)) {
+                return tp;
+            }
+        }
+
+        TouristPackage newTouristPackage = new TouristPackage(0, services);
+        persistence.createTouristPackage(newTouristPackage);
+        return newTouristPackage;
+    }
 }

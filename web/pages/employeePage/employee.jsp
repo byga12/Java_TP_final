@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="logic.Employee"%>
+<%@page import="logic.Sale"%>
 <%@page import="logic.Controller"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -54,6 +55,7 @@
                             <th>Dirección</th>
                             <th>Puesto</th>
                             <th>Sueldo</th>
+                            <th>Ventas realizadas (id)</th>
                         </tr>
                         <%
                             List<Employee> employeesList = (List) mySession.getAttribute("employeesList");
@@ -84,6 +86,13 @@
                             <td><%=employee.getAddress()%></td>
                             <td><%=employee.getJob()%></td>
                             <td><%=employee.getSalary()%></td>
+                            <td>
+                              <ul>
+                                <%for(Sale saleDone : employee.getSalesDone()){%>
+                                  <li><%=saleDone.getSaleId()%></li>
+                                <%}%>
+                              </ul>
+                            </td>
                         </tr>
                         <%}%>
 

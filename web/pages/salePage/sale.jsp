@@ -46,6 +46,7 @@
                             <th>ID de venta</th>
                             <th>Método de pago</th>
                             <th>Fecha</th>
+                            <th>Precio</th>
                         </tr>
                         <%
                             List<Sale> salesList = (List) mySession.getAttribute("salesList");
@@ -68,6 +69,7 @@
                             <td><%=sale.getSaleId()%></td>          
                             <td><%=sale.getPaymentMethod()%></td>
                             <td><%=sale.getSaleDate()%></td>
+                            <td><%=sale.getPrice()%></td>
                         </tr>
                         <%}%>
 

@@ -23,7 +23,8 @@
   justify-self: center;
 }
 
-.form input {
+.form input,
+.form select {
   padding-block: 0.5rem;
   padding-inline: 0.7rem;
 }
