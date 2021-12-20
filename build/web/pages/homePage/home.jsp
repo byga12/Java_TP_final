@@ -16,6 +16,7 @@
       type="text/javascript"
       defer
     ></script>
+    <link rel="stylesheet" href="homeStyles.css" />
   </head>
   <body>
     <% HttpSession mySession = request.getSession(); String username = (String)
@@ -23,8 +24,10 @@
     response.sendRedirect("index.jsp"); } %>
     <div class="container">
       <navigation-component></navigation-component>
-      <div class="content">
-        <h1>ACA VA TODOOOOO</h1>
+      <div class="home_content">
+        <h1 class="home_title">
+          Bienvenido al sistema de gestión de ventas y usuarios de tourA
+        </h1>
       </div>
     </div>
   </body>

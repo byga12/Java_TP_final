@@ -1,5 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="logic.Sale"%>
+<%@page import="logic.Employee"%>
+<%@page import="logic.Customer"%>
 <%@page import="logic.Controller"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -47,6 +49,8 @@
                             <th>Método de pago</th>
                             <th>Fecha</th>
                             <th>Precio</th>
+                            <th>Empleado a cargo</th>
+                            <th>Cliente (comprador)</th>
                         </tr>
                         <%
                             List<Sale> salesList = (List) mySession.getAttribute("salesList");
@@ -70,6 +74,8 @@
                             <td><%=sale.getPaymentMethod()%></td>
                             <td><%=sale.getSaleDate()%></td>
                             <td><%=sale.getPrice()%></td>
+                            <td><%=sale.getEmployee().getName()%> <%=sale.getEmployee().getSurname()%></td>
+                            <td><%=sale.getCustomer().getName()%> <%=sale.getCustomer().getSurname()%></td>
                         </tr>
                         <%}%>
 

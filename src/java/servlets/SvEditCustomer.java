@@ -13,22 +13,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.Controller;
-import logic.Employee;
+import logic.Customer;
 
-@WebServlet(name = "SvEditEmployee", urlPatterns = {"/SvEditEmployee"})
-public class SvEditEmployee extends HttpServlet {
+@WebServlet(name = "SvEditCustomer", urlPatterns = {"/SvEditCustomer"})
+public class SvEditCustomer extends HttpServlet {
 
     //Instancio la clase Controller de la lógica
     Controller control = new Controller();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         try {
             //Obtengo el userId
             int userId = Integer.parseInt(request.getParameter("userId"));
@@ -43,32 +43,23 @@ public class SvEditEmployee extends HttpServlet {
             String nationality = request.getParameter("nationality");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
-            String job = request.getParameter("job");
-            Double salary = Double.parseDouble(request.getParameter("salary"));
 
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-
-            Employee employee = control.getEmployeeById(userId);
-            employee.setName(name);
-            employee.setSurname(surname);
-            employee.setAddress(address);
-            employee.setDni(dni);
-            employee.setBirthDate(birthDate);
-            employee.setNationality(nationality);
-            employee.setPhone(phone);
-            employee.setEmail(email);
-            employee.setJob(job);
-            employee.setSalary(salary);
-            employee.setUsername(username);
-            employee.setPassword(password);
-            //Modifico el empleado llamando a la controladora
-            control.updateEmployee(employee);
+            Customer customer = control.getCustomerById(userId);
+            customer.setName(name);
+            customer.setSurname(surname);
+            customer.setAddress(address);
+            customer.setDni(dni);
+            customer.setBirthDate(birthDate);
+            customer.setNationality(nationality);
+            customer.setPhone(phone);
+            customer.setEmail(email);
+            //Modifico el cliente llamando a la controladora
+            control.updateCustomer(customer);
             //Refresco y redirijo
-            request.getSession().setAttribute("employeesList", control.getEmployees());
-            response.sendRedirect("pages/employeePage/employee.jsp");
+            request.getSession().setAttribute("customersList", control.getCustomers());
+            response.sendRedirect("pages/customerPage/customer.jsp");
         } catch (ParseException ex) {
-            Logger.getLogger(SvEditEmployee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SvEditCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -76,14 +67,13 @@ public class SvEditEmployee extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         int userId = Integer.parseInt(request.getParameter("userId"));
-        Employee toUpdateEmployee = control.getEmployeeById(userId);
+        Customer toUpdateCustomer = control.getCustomerById(userId);
 
         HttpSession mySession = request.getSession();
-        mySession.setAttribute("toUpdateEmployee", toUpdateEmployee);
+        mySession.setAttribute("toUpdateCustomer", toUpdateCustomer);
 
-        response.sendRedirect("pages/employeePage/employeeEdit.jsp");
+        response.sendRedirect("pages/customerPage/customerEdit.jsp");
     }
 
     @Override

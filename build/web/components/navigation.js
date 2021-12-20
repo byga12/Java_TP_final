@@ -5,6 +5,19 @@ class navigation extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <style>
+      body::-webkit-scrollbar {
+        width: 12px;               /* width of the entire scrollbar */
+      }
+      
+      body::-webkit-scrollbar-track {
+        background: transparent;        /* color of the tracking area */
+      }
+      
+      body::-webkit-scrollbar-thumb {
+        background-color: #4b535c;    /* color of the scroll thumb */
+        border-radius: 20px;       /* roundness of the scroll thumb */
+        border: 3px solid white;  /* creates padding around scroll thumb */
+      }
       .nav_container {
         width: 15rem;
         flex-shrink: 0;
@@ -117,12 +130,6 @@ class navigation extends HTMLElement {
             <a href="../../SvSale" class="section_item">
               <i class="fas fa-money-bill-wave section_item_icon"></i>
               <p class="section_item_text">Ventas</p>
-            </a>
-          </li>
-          <li>
-            <a href="../../SvProfit" class="section_item">
-              <i class="fas fa-chart-line section_item_icon"></i>
-              <p class="section_item_text">Ganancias</p>
             </a>
           </li>
           

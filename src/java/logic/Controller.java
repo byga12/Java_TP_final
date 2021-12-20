@@ -2,7 +2,6 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import persistence.PersistenceController;
@@ -16,7 +15,7 @@ public class Controller { //a.k.a la clase del admin
     //AUTENTICAR DATOS
     public boolean auth(String username, String password) {
         List<Employee> employeeList = persistence.getEmployees();
-
+        
         if (employeeList != null) {
             for (Employee employee : employeeList) {
                 if (employee.getUsername().equals(username) && employee.getPassword().equals(password)) {
@@ -49,9 +48,8 @@ public class Controller { //a.k.a la clase del admin
     }
 
     //MODIFICAR EMPLEADO
-    public void updateEmployee(int id, String name, String surname, String address, String dni, Date birthDate, String nationality, String phone, String email, String job, Double salary, String username, String password) {
-        Employee updatedEmployee = new Employee(job, salary, username, password, id, name, surname, address, dni, nationality, phone, email, birthDate);
-        persistence.updateEmployee(updatedEmployee);
+    public void updateEmployee(Employee employee) {
+        persistence.updateEmployee(employee);
     }
 
     //OBTENER CLIENTES
@@ -74,7 +72,11 @@ public class Controller { //a.k.a la clase del admin
     public void deleteCustomer(int id) throws NonexistentEntityException {
         persistence.deleteCustomer(id);
     }
+
     //MODIFICAR CLIENTE
+    public void updateCustomer(Customer customer) {
+        persistence.updateCustomer(customer);
+    }
 
     //OBTENER VENTAS
     public List<Sale> getSales() {
@@ -82,6 +84,10 @@ public class Controller { //a.k.a la clase del admin
     }
 
     //OBTENER VENTA POR ID
+    public Sale getSaleById(int id) {
+        return persistence.getSaleById(id);
+    }
+
     //ALTA VENTA CON SERVICIO ÚNICO
     public void createSaleWithService(Date saleDate, String paymentMethod, Employee employee, Customer customer, TouristService service) {
         Sale saleWithService = new Sale(0, saleDate, paymentMethod, employee, customer, service);
@@ -98,7 +104,11 @@ public class Controller { //a.k.a la clase del admin
     public void deleteSale(int id) throws NonexistentEntityException {
         persistence.deleteSale(id);
     }
+
     //MODIFICAR VENTA
+    public void updateSale(Sale sale) {
+        persistence.updateSale(sale);
+    }
 
     //OBTENER SERVICIOS TURÍSTICOS
     public List<TouristService> getTouristServices() {
@@ -120,7 +130,11 @@ public class Controller { //a.k.a la clase del admin
     public void deleteTouristService(int id) throws NonexistentEntityException {
         persistence.deleteTouristService(id);
     }
+
     //MODIFICAR SERVICIO TURÍSTICO
+    public void updateTouristService(TouristService touristService) {
+        persistence.updateTouristService(touristService);
+    }
 
     //OBTENER PAQUETES TURÍSTICOS
     public List<TouristPackage> getTouristPackages() {
@@ -128,6 +142,10 @@ public class Controller { //a.k.a la clase del admin
     }
 
     //OBTENER PAQUETE TURÍßTICO POR ID
+    public TouristPackage getTouristPackageById(int id) {
+        return persistence.getTouristPackageById(id);
+    }
+
     //ALTA PAQUETE TURÍSTICO
     public void createTouristPackage(List<TouristService> servicesList) {
         TouristPackage touristPackage = new TouristPackage(0, servicesList);
@@ -138,7 +156,11 @@ public class Controller { //a.k.a la clase del admin
     public void deleteTouristPackage(int id) throws NonexistentEntityException {
         persistence.deleteTouristPackage(id);
     }
+
     //MODIFICAR PAQUETE TURÍSTICO
+    public void updateTouristPackage(TouristPackage touristPackage) {
+        persistence.updateTouristPackage(touristPackage);
+    }
 
     //Existe un paquete con la lista de servicios dados? devolvemelo, sino crea uno y retornalo
     public TouristPackage getOrCreatePackage(List<TouristService> services) {
@@ -154,17 +176,44 @@ public class Controller { //a.k.a la clase del admin
         for (TouristPackage tp : packages) {
             int arrayB[] = new int[tp.getServicesList().size()];
             for (int i = 0; i < tp.getServicesList().size(); i++) {
-
+                
                 arrayB[i] = tp.getServicesList().get(i).getServiceId();
             }
-
+            
             if (Arrays.equals(arrayA, arrayB)) {
                 return tp;
             }
         }
-
+        
         TouristPackage newTouristPackage = new TouristPackage(0, services);
         persistence.createTouristPackage(newTouristPackage);
         return newTouristPackage;
+    }
+
+    //Existe un paquete con la lista de servicios dados? devolvemelo, sino actualiza el existente
+    public void getOrUpdatePackage(List<TouristService> services, int packageToUpdateId) {
+        List<TouristPackage> packages = persistence.getTouristPackages();
+
+        ////Obtengo array de ids de la lista servicio
+        int arrayA[] = new int[services.size()];
+        for (int i = 0; i < services.size(); i++) {
+            arrayA[i] = services.get(i).getServiceId();
+        }
+        /////
+
+        for (TouristPackage tp : packages) {
+            int arrayB[] = new int[tp.getServicesList().size()];
+            for (int i = 0; i < tp.getServicesList().size(); i++) {
+                
+                arrayB[i] = tp.getServicesList().get(i).getServiceId();
+            }
+            
+            if (Arrays.equals(arrayA, arrayB)) {
+                return;
+            }
+        }
+        TouristPackage updated = persistence.getTouristPackageById(packageToUpdateId);
+        updated.setServicesList(services);
+        persistence.updateTouristPackage(updated);
     }
 }

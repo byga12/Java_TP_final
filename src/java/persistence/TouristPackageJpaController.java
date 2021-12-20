@@ -33,7 +33,6 @@ public class TouristPackageJpaController implements Serializable {
     public TouristPackageJpaController() {
         emf = Persistence.createEntityManagerFactory("Shimabuku_Gabriel_tpo_finalPU");
     }
-
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -140,6 +139,7 @@ public class TouristPackageJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
+
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {

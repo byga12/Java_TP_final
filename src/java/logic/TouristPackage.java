@@ -2,6 +2,7 @@ package logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -71,14 +72,14 @@ public class TouristPackage implements Serializable {
     }
 
     public void setServicesList(List<TouristService> servicesList) {
-        //borro las asociaciones de servicios anteriores.
-        for (TouristService service : this.servicesList) {
-            service.removePackageWithService(this);
-        }
+//        //borro las asociaciones de servicios anteriores.
+//        for (TouristService service : this.servicesList) {
+//            service.removePackageWithService(this);
+//        }
         //asocio los nuevos servicios a este paquete
-        for (TouristService service : servicesList) {
-            service.removePackageWithService(this);
-        }
+//        for (TouristService service : servicesList) {
+//            service.removePackageWithService(this);
+//        }
         //calculo nuevamente el precio final
         double finalPrice = 0;
         for (TouristService service : servicesList) {
@@ -93,5 +94,16 @@ public class TouristPackage implements Serializable {
     ////////////////////////////////////////////
     public void addSaleWithPackage(Sale sale) {
         this.salesWithPackage.add(sale);
+    }
+
+    //este método devuelve true si existe el servicio que le pasó como parámetro en el paquete.
+    public boolean hasTouristService(TouristService actualTouristService) {
+        boolean exists = false;
+        for (TouristService touristService : this.getServicesList()) {
+            if (touristService.getServiceName().equals(actualTouristService.getServiceName())) {
+                exists = true;
+            }
+        }
+        return exists;
     }
 }
