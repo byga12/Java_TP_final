@@ -74,8 +74,12 @@
                             <td><%=sale.getPaymentMethod()%></td>
                             <td><%=sale.getSaleDate()%></td>
                             <td><%=sale.getPrice()%></td>
-                            <td><%=sale.getEmployee().getName()%> <%=sale.getEmployee().getSurname()%></td>
-                            <td><%=sale.getCustomer().getName()%> <%=sale.getCustomer().getSurname()%></td>
+                            <td><%=(sale.getEmployee() == null ? "(borrado)" : sale.getEmployee().getName())%> 
+                                <%=(sale.getEmployee() == null ? " " : sale.getEmployee().getName())%></td>
+                            <td>
+                                <%=(sale.getCustomer() == null ? "(borrado)" : sale.getCustomer().getName())%> 
+                                <%=(sale.getCustomer() == null ? " " : sale.getCustomer().getName())%>
+                            </td>
                         </tr>
                         <%}%>
 

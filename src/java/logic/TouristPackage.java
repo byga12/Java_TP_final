@@ -2,7 +2,6 @@ package logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,11 +32,11 @@ public class TouristPackage implements Serializable {
         this.packageId = packageId;
         this.servicesList = servicesList;
         double finalPrice = 0;
-        for (TouristService service : servicesList) {
-//            service.addPackageWithService(this);
-            finalPrice += service.getServicePrice();
-            finalPrice = finalPrice - finalPrice * 0.1;
-        }
+//        for (TouristService service : servicesList) {
+////            service.addPackageWithService(this);
+//            finalPrice += service.getServicePrice();
+//            finalPrice = finalPrice - finalPrice * 0.1;
+//        }
         this.packagePrice = finalPrice;
         this.salesWithPackage = new ArrayList<>();
     }

@@ -111,10 +111,6 @@ public class Sale implements Serializable {
     }
 
     public void setEmployee(Employee employee) {
-        //el empleado anterior se desvincula de esta venta
-        this.employee.removeSale(this);
-        //el empleado nuevo añade esta venta
-        employee.addSale(this);
         this.employee = employee;
 
     }
@@ -124,10 +120,6 @@ public class Sale implements Serializable {
     }
 
     public void setCustomer(Customer customer) {
-        //el cliente anterior se desvincula
-        this.customer.removeSale(this);
-        //el cliente nuevo añade esta venta
-        customer.addSale(this);
         this.customer = customer;
     }
 

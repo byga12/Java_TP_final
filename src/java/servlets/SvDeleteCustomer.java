@@ -31,7 +31,9 @@ public class SvDeleteCustomer extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            control.deleteCustomer(Integer.parseInt(request.getParameter("userId")));
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            control.deleteCustomer(userId);
+
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(SvDeleteCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
