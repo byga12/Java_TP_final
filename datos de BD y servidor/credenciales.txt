@@ -1,6 +1,6 @@
 Base de datos
 nombre: turism_agency
 
-Servidor apache
+Tomcat manager
 usuario: byga
 contraseña: papasalhorno
