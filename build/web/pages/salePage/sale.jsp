@@ -75,10 +75,10 @@
                             <td><%=sale.getSaleDate()%></td>
                             <td><%=sale.getPrice()%></td>
                             <td><%=(sale.getEmployee() == null ? "(borrado)" : sale.getEmployee().getName())%> 
-                                <%=(sale.getEmployee() == null ? " " : sale.getEmployee().getName())%></td>
+                                <%=(sale.getEmployee() == null ? " " : sale.getEmployee().getSurname())%></td>
                             <td>
                                 <%=(sale.getCustomer() == null ? "(borrado)" : sale.getCustomer().getName())%> 
-                                <%=(sale.getCustomer() == null ? " " : sale.getCustomer().getName())%>
+                                <%=(sale.getCustomer() == null ? " " : sale.getCustomer().getSurname())%>
                             </td>
                         </tr>
                         <%}%>
