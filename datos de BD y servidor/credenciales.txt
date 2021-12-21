@@ -1,0 +1,6 @@
+Base de datos
+nombre: turism_agency
+
+Servidor apache
+usuario: byga
+contraseña: papasalhorno
